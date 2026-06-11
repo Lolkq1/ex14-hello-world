@@ -11,13 +11,13 @@ app.get('/usuarios/42', (req, res) => {
   res.headers({
     "content-type":"application/json"
   })
-  res.send("{ "id": "42" })
+  res.send(JSON.stringify({ "id": "42" }))
 });
 app.get('/usuarios/42', (req, res) => {
   res.headers({
     "content-type":"application/json"
   })
-  res.send("{ "id": "abc" })
+  res.send(JSON.stringify({ "id": "abc" }))
 });
 
 
