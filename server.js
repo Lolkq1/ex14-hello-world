@@ -40,6 +40,7 @@ app.put('/produtos/:id', (req, res) => {
 })
 
 app.delete('/produtos/1', (req, res) => {
+  produtos.splice(id,1)
   return res.status(204).send()
 })
 
