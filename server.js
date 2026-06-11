@@ -7,9 +7,19 @@ app.get('/', (req, res) => {
   res.send('Home');
 });
 
-app.get('/sobre', (req, res) => {
-  res.send('Sobre');
+app.get('/usuarios/42', (req, res) => {
+  res.headers({
+    "content-type":"application/json"
+  })
+  res.send("{ "id": "42" })
 });
+app.get('/usuarios/42', (req, res) => {
+  res.headers({
+    "content-type":"application/json"
+  })
+  res.send("{ "id": "abc" })
+});
+
 
 app.get('/contato', (req, res) => {
   res.send('Contato');
