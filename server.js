@@ -64,16 +64,9 @@ app.get('/produtos/:id', (req, res) => {
 
 
 app.put('/produtos/:id', (req, res) => {
-   let b=""
-  req.on("data", (chunk) => {
-    b+=chunk
+    produtos[id-1] = req.body
+    return res.send(req.body)
   })
-  req.on("end", () => {
-    let b2 = JSON.parse(b)
-    produtos[id] = b2
-    return res.send(b2)
-  })
-})
 
 app.delete('/produtos/:id', (req, res) => {
     produtos.splice(req.params.id-1,1)
