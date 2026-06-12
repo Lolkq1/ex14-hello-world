@@ -3,7 +3,7 @@ const app = express();
 const produtos = []
 // TODO: implemente a rota GET /
 // A resposta deve conter a palavra "Hello"
-
+app.use(express.json())
 app.get('/busca', (req, res) => {
     if (req.query.q && req.query.pagina) {
             let a = JSON.stringify({q: req.query.q, pagina: req.query.pagina})
@@ -18,6 +18,18 @@ app.get('/busca', (req, res) => {
         return res.send(a)
     }
     return res.send(JSON.stringify({q: ""}))
+})
+
+// POST /echo com body { "mensagem": "olá" } → 200, mesmo JSON de volta
+// POST /eco com body { "x": 1, "y": 2 } → 200, mesmo JSON de volta
+// Content-Type: application/json deve estar presente na resposta
+
+app.post('/echo', (req, res) => {
+    return res.send(JSON.stringify(req.body))
+})
+
+app.post('/eco', (req, res) => {
+    return res.send(JSON.stringify(req.body))
 })
 
 app.listen(3000, () => {
