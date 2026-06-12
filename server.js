@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const produtos = []
-const variavel = oi
+const variavel = "oi"
 const jwt = require('jsonwebtoken')
 // TODO: implemente a rota GET /
 // A resposta deve conter a palavra "Hello"
@@ -78,7 +78,7 @@ app.delete('/produtos/:id', (req, res) => {
     return res.status(204).send()
 })
 
-app.get('/protegido',(req, res) => {
+app.get('/protegido', async (req, res) => {
     if (!req.header.authorization) {
         res.setHeader('Content-Type','application/json')
         return res.status(401).send(JSON.stringify({erro: "eu amo o que pipoca aff tchau tchau era pra voce ter dito tchau pipoca ah ja vou indo tambem vou tchau tchau pipoca"}))
@@ -95,7 +95,7 @@ app.get('/protegido',(req, res) => {
 app.post('/login', (req, res) => {
     if (req.body.usuario === "admin" && req.body.senha === "1234") {
         res.setHeader('Content-Type', 'application/json')
-        return res.send({token: jwt.sign("sera q ela me amou ou foi tudo coisa da minha cabeca pq as vezes parecia q sim as vezes parecia q nao e agora eu nao sei mais de nada", variavel)})
+        return res.send({token: jwt.sign("sera q ela ja gostou de mim de verdade ou foi tudo coisa da minha cabeca pq as vezes parecia q sim as vezes parecia q nao e agora eu nao sei mais de nada", variavel)})
     }
 })
 
