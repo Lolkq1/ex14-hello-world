@@ -41,6 +41,51 @@ app.get('/usuarios/:id', (req, res) => {
     }))
 })
 
+app.post('/produtos', (req, res) => {
+  let b=""
+  req.on("data", (chunk) => {
+    b+=chunk
+  })
+  req.on("end", () => {
+    let b2 = JSON.parse(b)
+    let n = {
+      id: produtos.length+1,
+      nome: b2.nome,
+      preco: b2.preco
+    }
+  })
+  return res.status(201).send(n)
+});
+
+app.get('/produtos/:id', (req, res) => {
+    if (!req.params.id) {
+          return res.send(produtos)
+    }
+    if (parseInt(req.params.id) > produtos.length+1) {
+        return res.status(404).send()
+    }
+    return res.send(produtos[parseInt(req.params.id)-1])
+})
+
+
+app.put('/produtos/:id', (req, res) => {
+   let b=""
+  req.on("data", (chunk) => {
+    b+=chunk
+  })
+  req.on("end", () => {
+    let b2 = JSON.parse(b)
+    produtos[id] = b2
+    return res.send(b2)
+  })
+})
+
+app.delete('/produtos/:id', (req, res) => {
+  produtos.splice(req.params.id-1,1)
+  return res.status(204).send()
+})
+
+
 app.listen(3000, () => {
   console.log('Servidor rodando em http://localhost:3000');
 });
