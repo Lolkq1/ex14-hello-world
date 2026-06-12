@@ -29,6 +29,7 @@ app.post('/echo', (req, res) => {
 })
 
 app.post('/eco', (req, res) => {
+    res.setHeader('content-type','application/json')
     return res.send(JSON.stringify(req.body))
 })
 
