@@ -42,20 +42,15 @@ app.get('/usuarios/:id', (req, res) => {
 })
 
 app.post('/produtos', (req, res) => {
-  let b=""
-  req.on("data", (chunk) => {
-    b+=chunk
-  })
-  req.on("end", () => {
-    let b2 = JSON.parse(b)
     let n = {
       id: produtos.length+1,
-      nome: b2.nome,
-      preco: b2.preco
+      nome: req.body.nome,
+      preco: req.body.preco
     }
+     produtos.push(n)
+     return res.status(201).send(n)
   })
-  return res.status(201).send(n)
-});
+
 
 app.get('/produtos/:id', (req, res) => {
     if (!req.params.id) {
@@ -81,8 +76,8 @@ app.put('/produtos/:id', (req, res) => {
 })
 
 app.delete('/produtos/:id', (req, res) => {
-  produtos.splice(req.params.id-1,1)
-  return res.status(204).send()
+    produtos.splice(req.params.id-1,1)
+    return res.status(204).send()
 })
 
 
