@@ -34,6 +34,13 @@ app.post('/eco', (req, res) => {
     return res.send(JSON.stringify(req.body))
 })
 
+app.get('/usuarios/:id', (req, res) => {
+    res.setHeader('Content-Type', 'application/json')
+    return res.send(JSON.stringify({
+        id: req.params.id
+    }))
+})
+
 app.listen(3000, () => {
   console.log('Servidor rodando em http://localhost:3000');
 });
