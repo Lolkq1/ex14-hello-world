@@ -25,11 +25,12 @@ app.get('/busca', (req, res) => {
 // Content-Type: application/json deve estar presente na resposta
 
 app.post('/echo', (req, res) => {
+    res.setHeader('Content-Type','application/json')
     return res.send(JSON.stringify(req.body))
 })
 
 app.post('/eco', (req, res) => {
-    res.setHeader('content-type','application/json')
+    res.setHeader('Content-Type','application/json')
     return res.send(JSON.stringify(req.body))
 })
 
