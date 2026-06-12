@@ -42,6 +42,7 @@ app.get('/usuarios/:id', (req, res) => {
 })
 
 app.post('/produtos', (req, res) => {
+    console.log(req.body)
     let n = {
       id: produtos.length+1,
       nome: req.body.nome,
@@ -51,11 +52,12 @@ app.post('/produtos', (req, res) => {
      return res.status(201).send(n)
   })
 
+app.get('/produtos', (req, res) => {
+    return res.send(produtos)
+})
+
 
 app.get('/produtos/:id', (req, res) => {
-    if (!req.params.id) {
-          return res.send(produtos)
-    }
     if (parseInt(req.params.id) > produtos.length+1) {
         return res.status(404).send()
     }
@@ -64,7 +66,8 @@ app.get('/produtos/:id', (req, res) => {
 
 
 app.put('/produtos/:id', (req, res) => {
-    produtos[id-1] = req.body
+    req.body.id = req.params.id
+    produtos[req.params.id-1] = req.body
     return res.send(req.body)
   })
 
