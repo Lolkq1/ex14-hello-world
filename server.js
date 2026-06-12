@@ -3,8 +3,6 @@ const app = express();
 const produtos = []
 // TODO: implemente a rota GET /
 // A resposta deve conter a palavra "Hello"
-const express = require('express');
-const app = express();
 
 app.get('/busca', (req, res) => {
     if (req.query.q && req.query.pagina) {
