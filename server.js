@@ -6,7 +6,7 @@ const produtos = []
 
 app.get('/busca', (req, res) => {
     if (req.query.q && req.query.pagina) {
-            let a = JSON.stringify({q: req.query.q, express: req.query.pagina})
+            let a = JSON.stringify({q: req.query.q, pagina: req.query.pagina})
             return res.send(a)
     }
     if (req.query.pagina) {
