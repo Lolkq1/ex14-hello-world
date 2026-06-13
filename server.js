@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const produtos = []
+const tarefas = []
 const variavel = "oi"
 const jwt = require('jsonwebtoken')
 // TODO: implemente a rota GET /
@@ -99,6 +100,74 @@ app.get('/protegido', async (req, res) => {
         res.setHeader('Content-Type','application/json')
         return res.status(401).send(JSON.stringify({erro: "eu amo o que pipoca aff tchau tchau era pra voce ter dito tchau pipoca ah ja vou indo tambem vou tchau tchau pipoca2"}))
     }
+})
+
+app.post('/tarefas', async (req, res) => {
+    if (!req.headers.authorization) {
+        return res.status(401).send()
+    }
+    try {
+        let k = await jwt.verify(req.headers.authorization.split(" ")[1], variavel)
+        if (req.body.titulo.length < 1) {
+            return res.status(400).send("erro")
+        }
+        req.body.id = tarefas.length+1
+        tarefas.push(req.body)
+        return res.status(201).send()
+    } catch(err) {
+        return res.status(401).send()
+    }
+})
+
+app.put('/tarefas/:id', async (req, res) => {
+    let pos = parseInt(req.params.id)-1
+    if (!req.headers.authorization) {
+        return res.status(401).send()
+    }
+    try {
+        let k = await jwt.verify(req.headers.authorization.split(" ")[1], variavel)
+        if (req.body.titulo.length < 1) {
+            return res.status(400).send("erro")
+        }
+        req.body.id = tarefas.length+1
+        tarefas[pos] = req.body
+        return res.status(201).send(req.body)
+    } catch(err) {
+        return res.status(401).send()
+    }
+})
+
+app.delete('/tarefas/:id', async (req, res) => {
+    let pos = parseInt(req.params.id)-1
+    if (!req.headers.authorization) {
+        return res.status(401).send()
+    }
+    try {
+        let k = await jwt.verify(req.headers.authorization.split(" ")[1], variavel)
+        if (req.body.titulo.length < 1) {
+            return res.status(400).send("erro")
+        }
+        req.body.id = tarefas.length+1
+        tarefas.splice(pos, 1)
+    } catch(err) {
+        return res.status(401).send()
+    }
+})
+
+app.get('/tarefas', async (req, res) => {
+    if (!req.headers.authorization) {
+        return res.status(401).send()
+    }
+    try {
+        let k = await jwt.verify(req.headers.authorization.split(" ")[1], variavel)
+        return res.send(tarefas)
+    } catch(err) {
+        return res.status(401).send()
+    }
+})
+
+app.post('/auth/login', (req, res) => {
+    return res.send({token: jwt.sign('iae', variavel)})
 })
 
 app.post('/login', (req, res) => {
