@@ -44,11 +44,20 @@ app.get('/usuarios/:id', (req, res) => {
 })
 
 app.post('/produtos', (req, res) => {
-    console.log(req.body)
     let n = {
       id: produtos.length+1,
       nome: req.body.nome,
       preco: req.body.preco
+    }
+    if (!req.body) {
+        return res.status(400).send("erro ai")
+    }
+    if (!n.nome) {
+        res.setHeader("content-type", "application/json")
+        return res.status(400).send(JSON.stringify({erros:"erro ai"}))
+    }
+    if (n.preco < 0) {
+        return res.status(400).send("erro ai")
     }
      produtos.push(n)
      return res.status(201).send(n)
