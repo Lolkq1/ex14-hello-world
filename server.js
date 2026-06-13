@@ -103,8 +103,26 @@ app.post('/login', (req, res) => {
     }
 })
 
+app.get('/erro-sync', (req, res) => {
+    res.setHeader('Content-Type', 'application/json')
+    return res.status(500).send(JSON.stringify({
+        erro: "mensagem"
+    }))
+})
 
+app.get('/erro-async', (req, res) => {
+    res.setHeader('Content-Type', 'application/json')
+    return res.status(500).send(JSON.stringify({
+        erro: "mensagem"
+    }))
+})
 
+app.get('/rota-inexistente', (req, res) => {
+    res.setHeader('Content-Type', "application/json")
+    return res.status(404).send(JSON.stringify({
+        erro: "Rota não encontrada"
+    }))
+})
 
 app.listen(3000, () => {
   console.log('Servidor rodando em http://localhost:3000');
