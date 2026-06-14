@@ -167,7 +167,12 @@ app.get('/tarefas', async (req, res) => {
 })
 
 app.post('/auth/login', (req, res) => {
-    return res.send({token: jwt.sign('iae', variavel)})
+    if (req.body.usuario === "admin" && req.body.senha === "1234") {
+        let c = jwt.sign("oi", variavel)
+        return res.send({token: c})
+    } else {
+        return res.status(401).send("qual foi")
+    }
 })
 
 app.post('/login', (req, res) => {
