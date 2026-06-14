@@ -131,7 +131,7 @@ app.put('/tarefas/:id', async (req, res) => {
         }
         req.body.id = tarefas.length+1
         tarefas[pos] = req.body
-        return res.status(201).send(req.body)
+        return res.status(200).send(req.body)
     } catch(err) {
         return res.status(401).send()
     }
